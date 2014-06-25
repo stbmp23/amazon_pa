@@ -10,7 +10,7 @@ module AmazonPa
       def objects_from_response(request_method, klass, options={}, &block)
         klass.configure(options, &block)
         response = send(request_method.to_sym, klass.options) if klass.options?
-        AmazonPa::Attributes.new(response[:parse_body], response[:body])
+        AmazonPa::Attributes.new(response[:parse_body], response[:body], response[:url])
       end
 
       def option_params(options={}, operation)

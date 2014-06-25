@@ -33,7 +33,7 @@ describe AmazonPa::Client do
           :tracking_id => 'TI',
           :endpoint => 'http://example.com/test',
           :service => 'S',
-          :version => '2013-01-01',
+          :version => '2013-08-01',
           :connection_options => ::Hash,
           :middleware => Proc.new{},
         }
@@ -67,12 +67,12 @@ describe AmazonPa::Client do
   describe "#credentials?" do
     it "returns true if all credentials are present" do
       client = AmazonPa::Client.new(:access_key => 'AK', :secret_key => 'SK', :tracking_id => 'TI')
-      expect(client.credentials?).to be_true
+      expect(client.credentials?).to be_truthy
     end
 
     it "returns false if any credentials are missing" do
       client = AmazonPa::Client.new(:access_key => 'AK', :secret_key => 'SK')
-      expect(client.credentials?).to be_false
+      expect(client.credentials?).to be_falsey
     end
   end
 
@@ -89,7 +89,7 @@ describe AmazonPa::Client do
 
   describe "#request" do
     it "catches Faraday errors" do
-      subject.stub(:connection).and_raise(Faraday::Error::ClientError.new("Oops"))
+      allow(subject).to receive(:connection).and_raise(Faraday::Error::ClientError.new("Oops"))
       expect{subject.send(:request, :get, "/path")}.to raise_error AmazonPa::Error::ClientError
     end
   end
@@ -100,7 +100,7 @@ describe AmazonPa::Client do
     end
 
     it "returns signature for amazon api" do
-      expect(subject.send(:signature)).to eq "A1ho37zYC6EKoOd+jrP0Sb1EivN61alhLTS8BHpnKGQ="
+      expect(subject.send(:signature)).to eq "WU+GJX6Y5eKnxtCL2k+EhaV7WsWBAEmfpRL6GCnkeT8="
     end
   end
 
@@ -117,7 +117,7 @@ describe AmazonPa::Client do
         'Version' => AmazonPa::Default::VERSION,
         'Timestamp' => '2013-11-26T15:00:00Z',
         'Keywords' => 'ruby',
-        'Signature' => 'ZdZkPkI/0zTd7ETHRg3prbDTCiLbdb+ps4jClb+5MwA=',
+        'Signature' => 'toZ87CXhNU10Ca+ZoccHKBREoB2opfY3UqA27VzPwNE=',
       }
 
       expect(subject.send(:signed_parameters, {'Keywords' => 'ruby'})).to eq signed_params

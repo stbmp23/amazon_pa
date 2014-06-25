@@ -70,14 +70,14 @@ describe AmazonPa do
         config.secret_key = 'SK'
         config.tracking_id = 'TI'
       end
-      expect(AmazonPa.credentials?).to be_true
+      expect(AmazonPa.credentials?).to be_truthy
     end
 
     it "returns false if any credentials are missing" do
       AmazonPa.configure do |config|
         config.access_key = 'AK'
       end
-      expect(AmazonPa.credentials?).to be_false
+      expect(AmazonPa.credentials?).to be_falsey
     end
   end
 end

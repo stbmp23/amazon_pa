@@ -5,7 +5,6 @@ require 'simplecov'
 SimpleCov.start
 
 require 'amazon_pa'
-require 'rspec/autorun'
 
 require 'openssl'
 require 'timecop'

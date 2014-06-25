@@ -9,8 +9,8 @@ describe AmazonPa::API::Arguments do
     it "add attribute methods" do
       arguments = AmazonPa::API::Arguments.new(@keys.keys)
       @keys.each do |key, value|
-        expect(arguments.respond_to?(key)).to be_true
-        expect(arguments.respond_to?("#{key}=")).to be_true
+        expect(arguments.respond_to?(key)).to be_truthy
+        expect(arguments.respond_to?("#{key}=")).to be_truthy
       end
     end
 
@@ -30,8 +30,8 @@ describe AmazonPa::API::Arguments do
         arguments.send(:attr_accessor, key)
       end
       @keys.each do |key, value|
-        expect(arguments.respond_to?(key)).to be_true
-        expect(arguments.respond_to?("#{key}=")).to be_true
+        expect(arguments.respond_to?(key)).to be_truthy
+        expect(arguments.respond_to?("#{key}=")).to be_truthy
       end
     end
   end
@@ -76,12 +76,12 @@ describe AmazonPa::API::Arguments do
     it "returns true" do
       arguments = AmazonPa::API::Arguments.new(@keys.keys)
       arguments.configure({:keywords => 'ruby'})
-      expect(arguments.options?).to be_true
+      expect(arguments.options?).to be_truthy
     end
 
     it "returns false" do
       arguments = AmazonPa::API::Arguments.new(@keys.keys)
-      expect(arguments.options?).to be_false
+      expect(arguments.options?).to be_falsey
     end
   end
 end

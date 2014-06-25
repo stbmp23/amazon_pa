@@ -2,6 +2,7 @@ require 'faraday'
 require 'multi_xml'
 require 'amazon_pa/configurable'
 require 'amazon_pa/api/item_search'
+require 'amazon_pa/api/browse_node_lookup'
 require 'amazon_pa/error/client_error'
 require 'openssl'
 require 'uri'
@@ -9,6 +10,7 @@ require 'uri'
 module AmazonPa
   class Client
     include AmazonPa::API::ItemSearch
+    include AmazonPa::API::BrowseNodeLookup
     include AmazonPa::Configurable
 
     def initialize(options={})

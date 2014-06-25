@@ -4,14 +4,15 @@ require 'amazon_pa/inflections'
 module AmazonPa
   class Attributes
     include AmazonPa::Inflections
-    attr_reader :to_hash, :body
+    attr_reader :to_hash, :body, :request_url
     alias :xml :body
 
     # @param response_hash [Faraday::Resopnse.env[:parse_body]]
     # @param response_xml [Faraday::Response.env[:body]]
-    def initialize(response_hash, response_xml=nil)
+    def initialize(response_hash, response_xml=nil, response_url = nil)
       @to_hash = response_hash
       @body = response_xml if response_xml
+      @url = response_url.to_s
       define_attribute_methods
     end
 

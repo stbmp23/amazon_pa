@@ -5,10 +5,10 @@ describe AmazonPa::Attributes do
   before do
     @fix = "missing_parameter_error.xml"
     @client = AmazonPa::Client.new(access_key: 'AK', secret_key: 'SK', tracking_id: 'TI')
-    
+
     stub_get.with(:query => signed_params({operation: 'ItemSearch', keywords: 'perl'})).to_return(:body => fixture(@fix), :headers => {:content_type => "application/xml; charset=utf-8"})
     stub_get.with(:query => signed_params({operation: 'ItemSearch', keywords: 'ruby'})).to_return(:body => fixture("item_search.xml"), :headers => {:content_type => "application/xml; charset=utf-8"})
-    
+
     @response = @client.item_search(keywords: 'perl')
   end
 
@@ -18,7 +18,7 @@ describe AmazonPa::Attributes do
     end
 
     describe "#body" do
-      it "returns raw response body" do 
+      it "returns raw response body" do
         expect(@response.body).to eq fixture(@fix).read
         expect(@response.xml).to eq fixture(@fix).read
       end
@@ -37,7 +37,7 @@ describe AmazonPa::Attributes do
       end
 
       it "returns correct value defined method" do
-        expect(@response.respond_to?(:item_search_error_response)).to be_true
+        expect(@response.respond_to?(:item_search_error_response)).to be_truthy
       end
 
       it "returns AmazonPa::Attribute" do
