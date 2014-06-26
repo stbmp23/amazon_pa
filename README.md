@@ -18,7 +18,21 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Create api client
+
+```ruby
+client = AmazonPa.client do |conf|
+  conf.access_key = 'your access key'
+  conf.secret_key = 'your secret key'
+  conf.tracking_id = 'your tracking id'
+end
+```
+
+Get Response from Amazon Product API
+
+```ruby
+response = client.item_search(search_index: "Books", keywords: "ruby")
+```
 
 ## Contributing
 
