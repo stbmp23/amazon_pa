@@ -1,3 +1,5 @@
+ENV['TZ'] = 'Asia/Tokyo'
+
 require "coveralls"
 Coveralls.wear!
 
